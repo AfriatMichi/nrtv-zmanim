@@ -12,6 +12,7 @@ Output:
 from __future__ import annotations
 
 import json
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -35,6 +36,12 @@ LOAD_TIMEOUT_MS = 45_000
 TAB_SWITCH_TIMEOUT_MS = 10_000
 POLL_INTERVAL_MS = 250
 
+# The הודעות block is a carousel: it rotates every ~8s and React keeps only
+# the active slide in the DOM, so a single read sees just one announcement.
+# Watch it through a full rotation to collect them all.
+CAROUSEL_MAX_MS = 45_000
+CAROUSEL_INTERVAL_MS = 1_000
+
 
 def wait_until_painted(page: Page) -> None:
     """Block until the DOM actually contains clock times, not just a shell."""
@@ -43,6 +50,66 @@ def wait_until_painted(page: Page) -> None:
         " && document.body.innerText.includes('זמני תפילות')",
         timeout=LOAD_TIMEOUT_MS,
     )
+
+
+def collect_announcements(page: Page) -> list[str]:
+    """Watch the announcements carousel through one full rotation.
+
+    Returns every distinct line, in the order the slides first appeared.
+    Stops early once the carousel wraps back to the slide it started on.
+    """
+    slides: list[str] = []
+    first: str | None = None
+    saw_another = False
+    waited = 0
+
+    while waited < CAROUSEL_MAX_MS:
+        lines = page.evaluate(EXTRACTOR).get("announcements") or []
+        slide = "\n".join(lines)
+
+        if slide:
+            if slide not in slides:
+                slides.append(slide)
+            if first is None:
+                first = slide
+            elif slide != first:
+                saw_another = True
+            elif saw_another:
+                break  # wrapped around - we have seen the whole carousel
+
+        page.wait_for_timeout(CAROUSEL_INTERVAL_MS)
+        waited += CAROUSEL_INTERVAL_MS
+
+    # The starting point in the rotation varies run to run, so sort the
+    # slides into a stable order - otherwise the array would reshuffle every
+    # time and look like a change worth committing.
+    slides.sort()
+    return [line for slide in slides for line in slide.split("\n") if line.strip()]
+
+
+# "🌅  אשמורת הבוקר: 04:45 בבוקר" -> ("אשמורת הבוקר", "04:45")
+_TIMED_LINE = re.compile(r"^(?P<name>.+?):\s*(?P<time>\d{1,2}:\d{2})")
+_LEADING_JUNK = re.compile(r"^[^\w֐-׿]+")
+
+
+def parse_selichot(announcements: list[str]) -> list[dict]:
+    """Pull the selichot minyanim out of the announcement text.
+
+    They are published as free text in the הודעות carousel rather than as rows
+    in the prayer table, so they need their own pass. Seasonal: outside
+    Elul/Tishrei the slide is simply absent and this returns [].
+    """
+    out: list[dict] = []
+    for line in announcements:
+        if "סליחות" not in line and "אשמורת" not in line:
+            continue
+        m = _TIMED_LINE.match(line.strip())
+        if not m:
+            continue
+        name = _LEADING_JUNK.sub("", m.group("name")).strip()
+        if name:
+            out.append({"name": name, "time": m.group("time")})
+    return out
 
 
 def read_tab(page: Page, tab: str, previous_text: str) -> dict:
@@ -84,6 +151,7 @@ def scrape() -> dict:
 
         # Default tab is חול - read it as-is, without clicking anything.
         weekday = page.evaluate(EXTRACTOR)
+        announcements = collect_announcements(page)
 
         shabbat: dict | None = None
         try:
@@ -108,7 +176,8 @@ def scrape() -> dict:
             "hebrew": weekday.get("hebrewDate"),
         },
         "next_minyan": weekday.get("nextMinyan"),
-        "announcements": weekday.get("announcements", []),
+        "announcements": announcements,
+        "selichot": parse_selichot(announcements),
         "prayers": {
             "chol": {
                 "day_label": weekday.get("prayers", {}).get("dayLabel"),
