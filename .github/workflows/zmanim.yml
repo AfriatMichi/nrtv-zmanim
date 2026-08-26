@@ -1,0 +1,56 @@
+name: Fetch zmanim
+
+on:
+  schedule:
+    # 01:30 UTC = 04:30 Israel summer time / 03:30 winter time.
+    # Always after midnight in Israel, always before שחרית.
+    - cron: '30 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zmanim
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Scrape
+        run: python scrape_zmanim.py
+
+      - name: Commit result
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --staged --quiet; then
+            echo "No change in zmanim."
+          else
+            git commit -m "zmanim: $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Upload snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zmanim
+          path: data/zmanim.json
+          if-no-files-found: warn

@@ -1,0 +1,4 @@
+# The workflow's shell blocks run on Ubuntu - keep LF endings in the repo.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
