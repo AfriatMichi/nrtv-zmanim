@@ -26,6 +26,25 @@
 | `data/zmanim.json` | הצילום האחרון. |
 | `data/history/YYYY-MM-DD.json` | ארכיון — קובץ ליום. |
 
+## שימוש ממערכות אחרות
+
+הריפו ציבורי, אז ה־JSON נגיש ישירות בלי אימות:
+
+```
+https://raw.githubusercontent.com/AfriatMichi/nrtv-zmanim/main/data/zmanim.json
+```
+
+יום מסוים מהארכיון:
+
+```
+https://raw.githubusercontent.com/AfriatMichi/nrtv-zmanim/main/data/history/2026-08-26.json
+```
+
+* מוגש עם `Access-Control-Allow-Origin: *` — אפשר `fetch()` ישירות מדפדפן.
+* יש **cache של כ־5 דקות** ב־CDN של GitHub. אחרי עדכון ייתכן שתקבל עדיין את
+  הגרסה הקודמת; להקפצה מיידית אפשר להוסיף פרמטר משתנה, למשל `?t=1724700000`.
+* ללא הגבלת קצב משמעותית (בניגוד ל־API של GitHub שמוגבל ל־60 בקשות/שעה ללא טוקן).
+
 ## הרצה מקומית
 
 ```bash
