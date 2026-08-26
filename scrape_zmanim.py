@@ -6,8 +6,7 @@ DOM, click the שבת tab and read it again. Nothing about how the site computes
 its zmanim is reproduced or guessed here.
 
 Output:
-    data/zmanim.json                latest snapshot
-    data/history/YYYY-MM-DD.json    one file per day
+    data/zmanim.json    the current zmanim, overwritten in place
 """
 
 from __future__ import annotations
@@ -128,13 +127,8 @@ def scrape() -> dict:
 
 def write(payload: dict) -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    (DATA_DIR / "history").mkdir(parents=True, exist_ok=True)
-
     text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     (DATA_DIR / "zmanim.json").write_text(text, encoding="utf-8")
-    (DATA_DIR / "history" / f"{payload['date']['gregorian']}.json").write_text(
-        text, encoding="utf-8"
-    )
 
 
 def main() -> int:

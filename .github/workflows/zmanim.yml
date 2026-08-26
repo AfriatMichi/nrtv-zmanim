@@ -48,12 +48,12 @@ jobs:
             exit 0
           fi
 
-          # scraped_at moves on every single run, so on its own it is not a
-          # change worth a commit. Count the changed lines that are something
-          # else; if there are none, leave the repo alone. A new day always
-          # adds a whole history file, so it still lands here as a real change.
+          # scraped_at and the live countdown move on every single run, so
+          # neither is a change worth a commit. Count the changed lines that
+          # are something else; if there are none, leave the repo alone. The
+          # raw URL still serves current times - the content is identical.
           diff=$(git diff --staged -U0 -- data | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' || true)
-          real=$(printf '%s' "$diff" | grep -c -v '"scraped_at"' || true)
+          real=$(printf '%s' "$diff" | grep -c -vE '"(scraped_at|countdown)"' || true)
           real=${real:-0}
 
           if [ "$real" -eq 0 ]; then

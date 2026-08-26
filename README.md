@@ -22,9 +22,8 @@
 | --- | --- |
 | `extract.js` | פונקציית החילוץ שרצה **בתוך הדף**. כאן משנים אם מבנה האתר משתנה. |
 | `scrape_zmanim.py` | מריץ את הדפדפן, לוחץ על הטאב `שבת`, מרכיב את ה־JSON. |
-| `.github/workflows/zmanim.yml` | הרצה יומית + commit של התוצאה. |
-| `data/zmanim.json` | הצילום האחרון. |
-| `data/history/YYYY-MM-DD.json` | ארכיון — קובץ ליום. |
+| `.github/workflows/zmanim.yml` | הרצה כל שעתיים + commit של התוצאה. |
+| `data/zmanim.json` | הזמנים העדכניים — נדרס בכל ריצה. |
 
 ## שימוש ממערכות אחרות
 
@@ -32,12 +31,6 @@
 
 ```
 https://raw.githubusercontent.com/AfriatMichi/nrtv-zmanim/main/data/zmanim.json
-```
-
-יום מסוים מהארכיון:
-
-```
-https://raw.githubusercontent.com/AfriatMichi/nrtv-zmanim/main/data/history/2026-08-26.json
 ```
 
 * מוגש עם `Access-Control-Allow-Origin: *` — אפשר `fetch()` ישירות מדפדפן.
@@ -100,9 +93,10 @@ python scrape_zmanim.py
   אפשר גם להריץ ידנית דרך **Actions → Fetch zmanim → Run workflow**.
 * **הטאב `שבת`.** נלחץ אוטומטית וגם הוא נשמר ל־JSON. אם הלחיצה נכשלת, הריצה
   ממשיכה ומדפיסה אזהרה — זמני החול עדיין נשמרים.
-* **commit רק כשמשהו באמת השתנה.** `scraped_at` זז בכל ריצה, אז אם רק הוא
-  השתנה ה־Action מדלג על ה־commit. כלומר כל commit בהיסטוריה = זמן תפילה שזז,
-  הודעה חדשה, או יום חדש. הקובץ עצמו עדיין נשלף ומועלה כ־artifact בכל ריצה.
+* **commit רק כשמשהו באמת השתנה.** `scraped_at` ו־`next_minyan.countdown` זזים
+  בכל ריצה, אז אם רק הם השתנו ה־Action מדלג על ה־commit. זה לא משפיע על מה
+  שה־URL מגיש — התוכן זהה ממילא. שים לב: המשמעות היא ש־`scraped_at` בקובץ
+  יכול להיות מלפני כמה שעות גם כשהזמנים עדכניים לחלוטין.
 * **הגנה מפני שינוי באתר.** אם לא נמצאו זמני חול בכלל, הסקריפט מחזיר קוד יציאה 1
   וה־Action נכשל — כדי שתדע שמשהו השתנה, במקום לשמור קובץ ריק בשקט.
 * **`tzdata`.** נדרש כי ל־Windows אין מסד אזורי זמן של IANA. על ראנר Linux זה מיותר
