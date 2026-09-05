@@ -1,16 +1,16 @@
 {
   "source": "https://nrtv-production.up.railway.app/",
-  "scraped_at": "2026-09-04T19:31:51+03:00",
+  "scraped_at": "2026-09-05T03:14:38+03:00",
   "synagogue": "בית כנסת נווה רחמים",
   "date": {
-    "gregorian": "2026-09-04",
-    "weekday": "יום שישי",
-    "hebrew": "22 באלול 5786"
+    "gregorian": "2026-09-05",
+    "weekday": "יום שבת",
+    "hebrew": "23 באלול 5786"
   },
   "next_minyan": {
     "name": "שחרית ומוסף",
     "time": "07:45",
-    "countdown": "בעוד 12:13:32"
+    "countdown": "בעוד 04:30:45"
   },
   "announcements": [
     "אין להביא גניזה לבית הכנסת!",
@@ -112,15 +112,15 @@
     },
     {
       "name": "שקיעת החמה",
-      "time": "19:02"
+      "time": "19:01"
     },
     {
       "name": "צאת הכוכבים",
-      "time": "19:20"
+      "time": "19:19"
     },
     {
       "name": "צאת ר״ת",
-      "time": "20:14"
+      "time": "20:13"
     }
   ],
   "shiurim": [
@@ -146,6 +146,6 @@
     }
   ],
   "_meta": {
-    "rendered_html_bytes": 18779
+    "rendered_html_bytes": 18778
   }
 }
