@@ -1,6 +1,6 @@
 {
   "source": "https://nrtv-production.up.railway.app/",
-  "scraped_at": "2026-09-14T08:14:45+03:00",
+  "scraped_at": "2026-09-14T16:08:52+03:00",
   "synagogue": "בית כנסת נווה רחמים",
   "date": {
     "gregorian": "2026-09-14",
@@ -8,9 +8,9 @@
     "hebrew": "3 בתשרי 5787"
   },
   "next_minyan": {
-    "name": "שחרית מניין ב׳",
-    "time": "08:15",
-    "countdown": "בעוד 00:01:01"
+    "name": "מנחה",
+    "time": "18:25",
+    "countdown": "בעוד 02:16:53"
   },
   "announcements": [
     "היום ג׳ תשרי - צום גדליה מנחה בשעה 18:17"
@@ -55,7 +55,7 @@
         },
         {
           "name": "מנחה",
-          "time": "17:30"
+          "time": "17:15"
         },
         {
           "name": "ערבית מוצ״ש",
@@ -129,6 +129,6 @@
     }
   ],
   "_meta": {
-    "rendered_html_bytes": 18425
+    "rendered_html_bytes": 18424
   }
 }
