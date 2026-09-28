@@ -1,16 +1,16 @@
 {
   "source": "https://nrtv-production.up.railway.app/",
-  "scraped_at": "2026-09-28T17:17:51+03:00",
+  "scraped_at": "2026-09-29T01:11:06+03:00",
   "synagogue": "בית כנסת נווה רחמים",
   "date": {
-    "gregorian": "2026-09-28",
-    "weekday": "יום שני",
-    "hebrew": "17 בתשרי 5787"
+    "gregorian": "2026-09-29",
+    "weekday": "יום שלישי",
+    "hebrew": "18 בתשרי 5787"
   },
   "next_minyan": {
-    "name": "מנחה",
-    "time": "18:07",
-    "countdown": "בעוד 00:49:54"
+    "name": "שחרית מניין א׳ (הנץ)",
+    "time": "06:34",
+    "countdown": "בעוד 05:23:39"
   },
   "announcements": [
     "אין להביא גניזה לבית הכנסת!",
@@ -19,7 +19,7 @@
   "selichot": [],
   "prayers": {
     "chol": {
-      "day_label": "יום שני",
+      "day_label": "יום שלישי",
       "items": [
         {
           "name": "שחרית מניין א׳ (הנץ)",
@@ -68,11 +68,11 @@
   "day_times": [
     {
       "name": "עלות השחר",
-      "time": "05:21"
+      "time": "05:22"
     },
     {
       "name": "הנץ החמה",
-      "time": "06:33"
+      "time": "06:34"
     },
     {
       "name": "סוזק״ש מג״א",
@@ -92,19 +92,19 @@
     },
     {
       "name": "מנחה גדולה",
-      "time": "13:02"
+      "time": "13:01"
     },
     {
       "name": "שקיעת החמה",
-      "time": "18:31"
+      "time": "18:29"
     },
     {
       "name": "צאת הכוכבים",
-      "time": "18:49"
+      "time": "18:47"
     },
     {
       "name": "צאת ר״ת",
-      "time": "19:43"
+      "time": "19:41"
     }
   ],
   "shiurim": [
@@ -130,6 +130,7 @@
     }
   ],
   "_meta": {
-    "rendered_html_bytes": 18285
-  }
+    "rendered_html_bytes": 18287
+  },
+  "times_changed_at": "2026-09-28T17:17:51+03:00"
 }
