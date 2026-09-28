@@ -194,6 +194,33 @@ def scrape() -> dict:
     }
 
 
+def _prayer_times(payload: dict) -> list:
+    """The part of a snapshot that counts as "the times changed"."""
+    prayers = payload.get("prayers") or {}
+    return [
+        (prayers.get("chol") or {}).get("items", []),
+        (prayers.get("shabbat") or {}).get("items", []),
+        payload.get("selichot", []),
+    ]
+
+
+def stamp_times_changed(payload: dict) -> None:
+    """Set times_changed_at: when the prayer times last actually changed.
+
+    scraped_at moves on every run; the portal sorts synagogues by this field
+    instead, so a sync that found the same times doesn't bump the shul to the top.
+    """
+    try:
+        previous = json.loads((DATA_DIR / "zmanim.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        previous = None
+
+    if previous and _prayer_times(previous) == _prayer_times(payload):
+        payload["times_changed_at"] = previous.get("times_changed_at") or previous.get("scraped_at")
+    else:
+        payload["times_changed_at"] = payload["scraped_at"]
+
+
 def write(payload: dict) -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
@@ -207,6 +234,7 @@ def main() -> int:
         print("error: no prayer times found - the page layout probably changed", file=sys.stderr)
         return 1
 
+    stamp_times_changed(payload)
     write(payload)
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     return 0
