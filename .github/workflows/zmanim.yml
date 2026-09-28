@@ -2,11 +2,8 @@ name: Fetch zmanim
 
 on:
   schedule:
-    # Every two hours, at :30 past the even hours (UTC).
-    # In Israel that lands on 01:30, 03:30, 05:30 ... so a run always
-    # follows midnight - the new day's zmanim are picked up within 2h -
-    # and several runs precede שחרית.
-    - cron: '30 */2 * * *'
+    # Every four hours, at :30 (UTC): 00:30, 04:30, 08:30 ...
+    - cron: '30 */4 * * *'
   workflow_dispatch:
 
 permissions:
