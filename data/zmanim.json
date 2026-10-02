@@ -1,6 +1,6 @@
 {
   "source": "https://nrtv-production.up.railway.app/",
-  "scraped_at": "2026-10-02T00:08:49+03:00",
+  "scraped_at": "2026-10-02T08:55:39+03:00",
   "synagogue": "בית כנסת נווה רחמים",
   "date": {
     "gregorian": "2026-10-02",
@@ -8,9 +8,9 @@
     "hebrew": "21 בתשרי 5787"
   },
   "next_minyan": {
-    "name": "שחרית מניין א׳ (הנץ)",
-    "time": "06:36",
-    "countdown": "בעוד 06:27:56"
+    "name": "מנחה",
+    "time": "17:58",
+    "countdown": "בעוד 09:03:06"
   },
   "announcements": [
     "אין להביא גניזה לבית הכנסת!",
