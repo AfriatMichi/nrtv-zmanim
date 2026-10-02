@@ -1,6 +1,6 @@
 {
   "source": "https://nrtv-production.up.railway.app/",
-  "scraped_at": "2026-10-02T17:50:29+03:00",
+  "scraped_at": "2026-10-02T23:51:12+03:00",
   "synagogue": "בית כנסת נווה רחמים",
   "date": {
     "gregorian": "2026-10-02",
@@ -8,9 +8,9 @@
     "hebrew": "21 בתשרי 5787"
   },
   "next_minyan": {
-    "name": "הדלקת נרות",
-    "time": "18:05",
-    "countdown": "בעוד 00:15:26"
+    "name": "שחרית ומוסף",
+    "time": "07:45",
+    "countdown": "בעוד 07:54:44"
   },
   "announcements": [
     "אין להביא גניזה לבית הכנסת!",
@@ -134,7 +134,7 @@
     }
   ],
   "_meta": {
-    "rendered_html_bytes": 18280
+    "rendered_html_bytes": 18281
   },
   "times_changed_at": "2026-10-02T17:50:29+03:00"
 }
