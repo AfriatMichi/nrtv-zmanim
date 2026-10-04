@@ -1,16 +1,16 @@
 {
   "source": "https://nrtv-production.up.railway.app/",
-  "scraped_at": "2026-10-04T22:44:11+03:00",
+  "scraped_at": "2026-10-05T02:20:08+03:00",
   "synagogue": "בית כנסת נווה רחמים",
   "date": {
-    "gregorian": "2026-10-04",
-    "weekday": "יום ראשון",
-    "hebrew": "23 בתשרי 5787"
+    "gregorian": "2026-10-05",
+    "weekday": "יום שני",
+    "hebrew": "24 בתשרי 5787"
   },
   "next_minyan": {
     "name": "שחרית מניין א׳ (הנץ)",
     "time": "06:38",
-    "countdown": "בעוד 07:54:34"
+    "countdown": "בעוד 04:18:37"
   },
   "announcements": [
     "אין להביא גניזה לבית הכנסת!",
@@ -19,7 +19,7 @@
   "selichot": [],
   "prayers": {
     "chol": {
-      "day_label": "יום ראשון",
+      "day_label": "יום שני",
       "items": [
         {
           "name": "שחרית מניין א׳ (הנץ)",
@@ -68,11 +68,11 @@
   "day_times": [
     {
       "name": "עלות השחר",
-      "time": "05:25"
+      "time": "05:26"
     },
     {
       "name": "הנץ החמה",
-      "time": "06:37"
+      "time": "06:38"
     },
     {
       "name": "סוזק״ש מג״א",
@@ -96,15 +96,15 @@
     },
     {
       "name": "שקיעת החמה",
-      "time": "18:23"
+      "time": "18:22"
     },
     {
       "name": "צאת הכוכבים",
-      "time": "18:41"
+      "time": "18:40"
     },
     {
       "name": "צאת ר״ת",
-      "time": "19:35"
+      "time": "19:34"
     }
   ],
   "shiurim": [
@@ -130,7 +130,7 @@
     }
   ],
   "_meta": {
-    "rendered_html_bytes": 18291
+    "rendered_html_bytes": 18289
   },
   "times_changed_at": "2026-10-04T09:05:44+03:00"
 }
